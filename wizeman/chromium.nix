@@ -1,5 +1,7 @@
 { chromium ? null, nixpkgs }:
 
+assert chromium == null;
+
 let
   opkgs = import nixpkgs {
     system = "x86_64-linux";
@@ -13,7 +15,7 @@ in with opkgs.lib; rec {
       cpkg = if chromium == null
              then pkgs.chromium.override
              else pkgs.callPackage chromium;
-    in cpkg {
+    in pkgs.wrapChromium (cpkg {
       channel = chan;
       gconf = pkgs.gnome.GConf;
       gnomeSupport = true;
@@ -21,7 +23,7 @@ in with opkgs.lib; rec {
       proprietaryCodecs = true;
       cupsSupport = true;
       pulseSupport = true;
-    };
+    });
   in genAttrs [ "stable" "beta" "dev" ] buildChromium);
 
   testAll = let
