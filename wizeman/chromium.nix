@@ -11,6 +11,12 @@ in with opkgs.lib; rec {
     buildChromium = chan: let
       pkgs = import nixpkgs {
         inherit system;
+        config = {
+          chromium = {
+            enablePepperPDF = true;
+            enablePepperFlash = true;
+          };
+        };
       };
       cpkg = if chromium == null
              then pkgs.chromium.override
