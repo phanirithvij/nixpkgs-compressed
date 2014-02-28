@@ -25,7 +25,7 @@ in with opkgs.lib; rec {
       channel = chan;
       gconf = pkgs.gnome.GConf;
       gnomeSupport = true;
-      gnomeKeyringSupport = true;
+      #gnomeKeyringSupport = true; # Disable, as it's failing at the moment
       proprietaryCodecs = true;
       cupsSupport = true;
       pulseSupport = true;
