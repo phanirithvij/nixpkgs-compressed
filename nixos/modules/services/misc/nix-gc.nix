@@ -52,7 +52,7 @@ in
 
     systemd.services.nix-gc =
       { description = "Nix Garbage Collector";
-        script = "exec ${config.nix.package.out}/bin/nix-collect-garbage ${cfg.options}";
+        script = "${pkgs.procps}/bin/pgrep -G nixbld || HOME=/tmp exec ${config.nix.package.out}/bin/nix-collect-garbage ${cfg.options}";
         startAt = optional cfg.automatic cfg.dates;
       };
 
