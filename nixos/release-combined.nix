@@ -45,7 +45,7 @@ in rec {
 
         (all nixos.iso_minimal)
         nixos.iso_graphical.x86_64-linux
-        nixos.ova.x86_64-linux
+        #nixos.ova.x86_64-linux
 
         #(all nixos.tests.containers)
         nixos.tests.chromium
