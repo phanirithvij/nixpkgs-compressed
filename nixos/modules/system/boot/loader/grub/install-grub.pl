@@ -271,7 +271,15 @@ else {
           set timeout=1
         else
           set default=$defaultEntry
-          set timeout=$timeout
+          if keystatus ; then
+            if keystatus --shift ; then
+              set timeout=-1
+            else
+              set timeout=0
+            fi
+          else
+            set timeout=$timeout
+          fi
         fi
 
         # Setup the graphics stack for bios and efi systems
