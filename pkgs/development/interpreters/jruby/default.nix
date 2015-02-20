@@ -18,6 +18,8 @@ stdenv.mkDerivation rec {
      rm $out/bin/*.{bat,dll,exe,sh}
      mv $out/COPYING $out/LICENSE* $out/docs
 
+     PATH="$out/bin:$PATH" patchShebangs $out/bin
+
      for i in $out/bin/*; do
        wrapProgram $i \
          --set JAVA_HOME ${jre}
