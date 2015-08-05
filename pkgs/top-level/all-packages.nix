@@ -16350,6 +16350,8 @@ with pkgs;
 
   lincity_ng = callPackage ../games/lincity/ng.nix {};
 
+  lincity_ng_git = callPackage ../games/lincity/ng_git.nix {};
+
   liquidwar = callPackage ../games/liquidwar {
     guile = guile_1_8;
   };
