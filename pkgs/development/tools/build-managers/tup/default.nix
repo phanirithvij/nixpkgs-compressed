@@ -2,13 +2,13 @@
 
 stdenv.mkDerivation rec {
   name = "tup-${version}";
-  version = "0.7.3";
+  version = "0.7.4";
 
   src = fetchFromGitHub {
     owner = "gittup";
     repo = "tup";
     rev = "v${version}";
-    sha256 = "1x2grwmlf2izip4djb8cjwgl8p3x0bmfqwzjsc017mqi17qkijy8";
+    sha256 = "0gpmll6fvj2jl0ljzn80spmivc14csnnrsj04d6xz3yfvym35wra";
   };
 
   buildInputs = [ fuse pkgconfig ];
