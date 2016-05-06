@@ -1,21 +1,25 @@
-{ stdenv, fetchurl, openssl }:
+{ stdenv, fetchFromGitHub, openssl, autoreconfHook }:
 
 stdenv.mkDerivation rec {
   name = "scrypt-${version}";
-  version = "1.2.0";
+  version = "2016-04-21";
 
-  src = fetchurl {
-    url = "https://www.tarsnap.com/scrypt/${name}.tgz";
-    sha256 = "1m39hpfby0fdjam842773i5w7pa0qaj7f0r22jnchxsj824vqm0p";
+  src = fetchFromGitHub {
+    owner = "Tarsnap";
+    repo = "scrypt";
+    rev = "f79aed8b71efd1709fc0fb7a0fd002646e94ef55";
+    sha256 = "15p7z587xdvad0qs74mjqwg486f7700hsjxa6xcmnwa3rk2arg28";
   };
 
-  buildInputs = [ openssl ];
+  buildInputs = [ autoreconfHook openssl ];
 
   patchPhase = ''
-    substituteInPlace Makefile.in \
+    substituteInPlace Makefile.am \
       --replace "command -p mv" "mv"
-    substituteInPlace autocrap/Makefile.am \
-      --replace "command -p mv" "mv"
+  '';
+
+  preConfigure = ''
+    echo "1.2.0_20160421" > scrypt-version
   '';
 
   meta = {
