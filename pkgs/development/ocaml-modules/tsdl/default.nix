@@ -24,6 +24,12 @@ stdenv.mkDerivation {
 
   unpackCmd = "tar xjf $src";
 
+  patchPhase = ''
+    substituteInPlace src/tsdl.ml \
+      --replace "foreign \"SDL_RenderPresent\"" \
+                "foreign \"SDL_RenderPresent\" ~release_runtime_lock:true"
+  '';
+
   buildPhase = ''
     # The following is done to avoid an additional dependency (ncurses)
     # due to linking in the custom bytecode runtime. Instead, just
