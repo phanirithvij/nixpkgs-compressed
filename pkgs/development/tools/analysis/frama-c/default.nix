@@ -8,12 +8,12 @@ in
 
 stdenv.mkDerivation rec {
   name    = "frama-c-${version}";
-  version = "20160501";
+  version = "20160502";
   slang   = "Aluminium";
 
   src = fetchurl {
     url    = "http://frama-c.com/download/frama-c-${slang}-${version}.tar.gz";
-    sha256 = "02z4d1lg2cs4hgbjx74crfrabv39dyhdrq5lvhv0q3hx5c8w7p90";
+    sha256 = "14mznmiiddd2q00jlb1zxa6h3zh703nfaq91nmnzj3rzmivbpbsy";
   };
 
   why2 = fetchurl {
