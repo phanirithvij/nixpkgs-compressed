@@ -83,7 +83,7 @@ in stdenv.mkDerivation (args // {
 
         cd $NIX_BUILD_TOP/deps/registry/src/*
 
-        for script in $patchRegistryDeps/*; do
+        for script in $patchRegistryDeps/*.sh; do
           # Run in a subshell so that directory changes and shell options don't
           # affect any following commands
 
