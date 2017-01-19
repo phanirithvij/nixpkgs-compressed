@@ -114,6 +114,17 @@ copyForced $fwdir/start_cd.elf  /boot/start_cd.elf
 copyForced $fwdir/start_db.elf  /boot/start_db.elf
 copyForced $fwdir/start_x.elf   /boot/start_x.elf
 
+cat <<EOF > /boot/config.txt.tmp
+# Warning: this file has been generated automatically by NixOS. Changes will be overwritten.
+
+gpu_mem=16
+
+kernel=kernel7.img
+initramfs initrd
+EOF
+
+mv /boot/config.txt.tmp /boot/config.txt
+
 # Remove obsolete files from /boot and /boot/old.
 for fn in /boot/old/*linux* /boot/old/*initrd-initrd* /boot/bcm*.dtb; do
     if ! test "${filesCopied[$fn]}" = 1; then
