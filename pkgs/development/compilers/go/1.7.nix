@@ -107,6 +107,7 @@ stdenv.mkDerivation rec {
     [ ./remove-tools-1.7.patch
       ./cacert-1.7.patch
       ./creds-test.patch
+      ./flaky-tests.patch
     ];
 
   SSL_CERT_FILE = "${cacert}/etc/ssl/certs/ca-bundle.crt";
