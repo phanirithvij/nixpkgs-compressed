@@ -1,0 +1,33 @@
+From ecc4474341504f5893c8333dbb68c520dbe93ca5 Mon Sep 17 00:00:00 2001
+From: Ian Lance Taylor <iant@golang.org>
+Date: Thu, 15 Dec 2016 17:42:53 -0800
+Subject: [PATCH] runtime/pprof: deflake tests for heavily loaded systems
+
+In the sampling tests, let the test pass if we get at least 10 samples.
+
+Fixes #18332.
+
+Change-Id: I8aad083d1a0ba179ad6663ff43f6b6b3ce1e18cd
+Reviewed-on: https://go-review.googlesource.com/34507
+Reviewed-by: Brad Fitzpatrick <bradfitz@golang.org>
+---
+ src/runtime/pprof/pprof_test.go | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
+
+diff --git a/src/runtime/pprof/pprof_test.go b/src/runtime/pprof/pprof_test.go
+index fd06607..2a242a1 100644
+--- a/src/runtime/pprof/pprof_test.go
++++ b/src/runtime/pprof/pprof_test.go
+@@ -204,7 +204,11 @@ func profileOk(t *testing.T, need []string, prof bytes.Buffer, duration time.Dur
+ 	}
+ 
+ 	// Check that we got a reasonable number of samples.
+-	if ideal := uintptr(duration * 100 / time.Second); samples == 0 || samples < ideal/4 {
++	// We used to always require at least ideal/4 samples,
++	// but that is too hard to guarantee on a loaded system.
++	// Now we accept 10 or more samples, which we take to be
++	// enough to show that at least some profiling is ocurring.
++	if ideal := uintptr(duration * 100 / time.Second); samples == 0 || (samples < ideal/4 && samples < 10) {
+ 		t.Logf("too few samples; got %d, want at least %d, ideally %d", samples, ideal/4, ideal)
+ 		ok = false
+ 	}
