@@ -1,0 +1,13 @@
+diff --git a/reference.c b/reference.c
+index b9a25f5..66812bf 100644
+--- a/reference.c
++++ b/reference.c
+@@ -1067,7 +1067,7 @@ REF_SetReference(int stratum,
+   if (drift_file) {
+     /* Update drift file at most once per hour */
+     drift_file_age += update_interval;
+-    if (drift_file_age < 0.0 || drift_file_age > 3600.0) {
++    if (drift_file_age < 0.0 || drift_file_age > 86400.0) {
+       update_drift_file(abs_freq_ppm, our_skew);
+       drift_file_age = 0.0;
+     }
