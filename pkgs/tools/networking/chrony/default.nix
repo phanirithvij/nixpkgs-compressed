@@ -13,6 +13,8 @@ stdenv.mkDerivation rec {
     sha256 = "05j17i1zlg19v8jkzlp710kbdgnb4541zgkqxqzcwglcvlc6g7rj";
   };
 
+  patches = [ ./drift.patch ];
+
   buildInputs = [ readline texinfo nss nspr ]
     ++ stdenv.lib.optionals stdenv.isLinux [ libcap libseccomp ];
   nativeBuildInputs = [ pkgconfig ];
