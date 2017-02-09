@@ -7,6 +7,8 @@ python2Packages.buildPythonApplication {
   name = "nixops-${version}";
   inherit version src;
 
+  patches = [ ./ipv6.patch ];
+
   buildInputs = [ libxslt ];
 
   pythonPath = with python2Packages;
