@@ -8,6 +8,10 @@ stdenv.mkDerivation rec {
     sha256 = "10z9icq28fww4qbzwra8d9z55ywbv74qk68nhiqfrydm21wkxplm";
   };
 
+  patches = [
+    ./qca-2.1.1-libressl.patch
+  ];
+
   buildInputs = [ openssl qtbase ];
   nativeBuildInputs = [ cmake pkgconfig ];
 
