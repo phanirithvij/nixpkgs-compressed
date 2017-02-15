@@ -16,7 +16,9 @@ stdenv.mkDerivation (rec {
   # https://github.com/libgit2/libgit2/issues/3885 - feel free to
   # remove this patch as soon as it's resolved (i.E. when cargo is
   # working fine without this patch)
-  patches = stdenv.lib.optionals stdenv.isDarwin [
+  patches = [
+    ./libressl.patch
+  ] ++ stdenv.lib.optionals stdenv.isDarwin [
     ./disable-security.framework.patch
   ];
 
