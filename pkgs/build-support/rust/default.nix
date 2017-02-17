@@ -7,6 +7,7 @@
 , buildInputs ? []
 , cargoUpdateHook ? ""
 , cargoDepsHook ? ""
+, patches ? []
 , ... } @ args:
 
 let
@@ -15,7 +16,7 @@ let
   };
 
   cargoDeps = fetchDeps {
-    inherit name src srcs sourceRoot cargoUpdateHook;
+    inherit name src srcs patches sourceRoot cargoUpdateHook;
     sha256 = depsSha256;
   };
 
@@ -31,7 +32,7 @@ in stdenv.mkDerivation (args // {
   postUnpack = ''
     eval "$cargoDepsHook"
 
-    echo "Using cargo deps from $cargoDeps"
+    echo "using cargo deps from $cargoDeps"
 
     cp -r "$cargoDeps" deps
     chmod +w deps -R
@@ -54,30 +55,28 @@ in stdenv.mkDerivation (args // {
     cd deps
     indexHash="$(basename $(echo registry/index/*))"
 
-    echo "Using indexHash '$indexHash'"
+    echo "using indexHash '$indexHash'"
 
     rm -rf -- "registry/cache/$indexHash" \
               "registry/index/$indexHash"
 
     mv registry/cache/HASH "registry/cache/$indexHash"
 
-    echo "Using rust registry from $rustRegistry"
+    echo "using rust registry from $rustRegistry"
     ln -s "$rustRegistry" "registry/index/$indexHash"
-
-    # Retrieved the Cargo.lock file which we saved during the fetch
     cd ..
-    mv deps/Cargo.lock $sourceRoot/
-
-    (
-        cd $sourceRoot
-
-        cargo fetch
-        cargo clean
-    )
   '' + (args.postUnpack or "");
 
-  prePatch = ''
+  postPatch = ''
+    # Retrieve the Cargo.lock file which we saved during the fetch
+    mv $NIX_BUILD_TOP/deps/Cargo.lock .
+
+    echo "copying cargo dependencies"
+    cargo fetch
+    cargo clean
+
     # Patch registry dependencies, using the scripts in $patchRegistryDeps
+    echo "patching cargo dependencies"
     (
         set -euo pipefail
 
@@ -90,15 +89,15 @@ in stdenv.mkDerivation (args // {
           ( . $script)
         done
     )
-  '' + (args.prePatch or "");
+  '' + (args.postPatch or "");
 
   buildPhase = args.buildPhase or ''
-    echo "Running cargo build --release"
+    echo "running cargo build --release"
     cargo build --release
   '';
 
   checkPhase = args.checkPhase or ''
-    echo "Running cargo test"
+    echo "running cargo test"
     cargo test
   '';
 
