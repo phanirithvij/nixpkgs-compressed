@@ -1,0 +1,34 @@
+From 22dd14945c25600de3cf8b91000c66703b551e4f Mon Sep 17 00:00:00 2001
+From: Jan Beich <jbeich@FreeBSD.org>
+Date: Sat, 28 Jan 2017 16:42:13 +0000
+Subject: [PATCH] Unbreak build with LibreSSL after 3e9e0a0d46e4
+
+---
+ openssl-compat.h                     | 4 ++--
+ sample/https-client.c                | 6 +++---
+ sample/le-proxy.c                    | 2 +-
+ sample/openssl_hostname_validation.c | 2 +-
+ test/regress_ssl.c                   | 2 +-
+ 5 files changed, 8 insertions(+), 8 deletions(-)
+
+diff --git a/openssl-compat.h b/openssl-compat.h
+index 69afc71..0f2dcb7 100644
+--- a/openssl-compat.h
++++ b/openssl-compat.h
+@@ -1,7 +1,7 @@
+ #ifndef OPENSSL_COMPAT_H
+ #define OPENSSL_COMPAT_H
+ 
+-#if OPENSSL_VERSION_NUMBER < 0x10100000L
++#if (OPENSSL_VERSION_NUMBER < 0x10100000L) || defined(LIBRESSL_VERSION_NUMBER)
+ 
+ static inline BIO_METHOD *BIO_meth_new(int type, const char *name)
+ {
+@@ -30,6 +30,6 @@ static inline BIO_METHOD *BIO_meth_new(int type, const char *name)
+ 
+ #define TLS_method SSLv23_method
+ 
+-#endif /* OPENSSL_VERSION_NUMBER < 0x10100000L */
++#endif /* (OPENSSL_VERSION_NUMBER < 0x10100000L) || defined(LIBRESSL_VERSION_NUMBER) */
+ 
+ #endif /* OPENSSL_COMPAT_H */

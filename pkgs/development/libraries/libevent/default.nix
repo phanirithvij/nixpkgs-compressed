@@ -9,6 +9,8 @@ stdenv.mkDerivation {
     sha256 = "18qz9qfwrkakmazdlwxvjmw8p76g70n3faikwvdwznns1agw9hki";
   };
 
+  patches = [ ./libressl.patch ];
+
   prePatch = let
       # https://lwn.net/Vulnerabilities/714581/
       debian = fetchurl {
@@ -18,9 +20,9 @@ stdenv.mkDerivation {
       };
     in ''
       tar xf '${debian}'
-      patches="$patches $(cat debian/patches/series | grep -v '^$\|^#' \
+      patches="$(cat debian/patches/series | grep -v '^$\|^#' \
                           | grep -v '^20d6d445.patch' \
-                          | grep -v '^dh-autoreconf' | sed 's|^|debian/patches/|')"
+                          | grep -v '^dh-autoreconf' | sed 's|^|debian/patches/|') $patches"
     '';
 
   # libevent_openssl is moved into its own output, so that openssl isn't present
