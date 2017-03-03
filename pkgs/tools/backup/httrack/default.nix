@@ -9,6 +9,8 @@ stdenv.mkDerivation rec {
     sha256 = "13y4m4rhvmgbbpc3lig9hzmzi86a5fkyi79sz1ckk4wfnkbim0xj";
   };
 
+  patches = [ ./sni.patch ];
+
   buildInputs = [ zlib openssl ] ++ stdenv.lib.optional stdenv.isDarwin libiconv;
 
   meta = {
