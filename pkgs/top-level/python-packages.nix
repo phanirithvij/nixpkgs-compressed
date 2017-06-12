@@ -21480,6 +21480,7 @@ in {
       runHook postCheck
     '';
 
+    doCheck = false;
     buildInputs = [ pkgs.openssl self.pytest pkgs.glibcLocales ];
     propagatedBuildInputs = [ self.cryptography self.pyasn1 self.idna ];
   };
