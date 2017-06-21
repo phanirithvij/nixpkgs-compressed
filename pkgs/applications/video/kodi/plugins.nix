@@ -106,7 +106,7 @@ rec {
     version = "3.1.13";
 
     src = fetchurl {
-      url = "https://offshoregit.com/${plugin}/${namespace}/${namespace}-${version}.zip";
+      url = "https://github.com/kodil/kodil/raw/master/repo/${namespace}/${namespace}-${version}.zip";
       sha256 = "1zyay7cinljxmpzngzlrr4pnk2a7z9wwfdcsk6a4p416iglyggdj";
     };
 
