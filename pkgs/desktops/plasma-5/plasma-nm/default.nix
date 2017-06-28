@@ -14,10 +14,6 @@ plasmaPackage {
       src = ./0001-mobile-broadband-provider-info-path.patch;
       inherit mobile_broadband_provider_info;
     })
-    (substituteAll {
-      src = ./0002-openvpn-binary-path.patch;
-      inherit openvpn;
-    })
   ];
   nativeBuildInputs = [ extra-cmake-modules kdoctools ];
   propagatedBuildInputs = [
