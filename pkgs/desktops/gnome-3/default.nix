@@ -196,10 +196,6 @@ let
 
   nautilus = callPackage ./core/nautilus { };
 
-  networkmanager_openvpn = pkgs.networkmanager_openvpn.override {
-    inherit gnome3;
-  };
-
   networkmanager_pptp = pkgs.networkmanager_pptp.override {
     inherit gnome3;
   };
@@ -212,15 +208,7 @@ let
     inherit gnome3;
   };
 
-  networkmanager_fortisslvpn = pkgs.networkmanager_fortisslvpn.override {
-    inherit gnome3;
-  };
-
   networkmanager_l2tp = pkgs.networkmanager_l2tp.override {
-    inherit gnome3;
-  };
-
-  networkmanager_iodine = pkgs.networkmanager_iodine.override {
     inherit gnome3;
   };
 
