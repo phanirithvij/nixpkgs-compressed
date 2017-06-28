@@ -107,7 +107,7 @@ in {
       basePackages = mkOption {
         type = types.attrsOf types.package;
         default = { inherit networkmanager modemmanager wpa_supplicant
-                            networkmanager_openvpn networkmanager_vpnc
+                            networkmanager_vpnc
                             networkmanager_openconnect
                             networkmanager_pptp networkmanager_l2tp; };
         internal = true;
@@ -182,9 +182,6 @@ in {
     environment.etc = with cfg.basePackages; [
       { source = configFile;
         target = "NetworkManager/NetworkManager.conf";
-      }
-      { source = "${networkmanager_openvpn}/etc/NetworkManager/VPN/nm-openvpn-service.name";
-        target = "NetworkManager/VPN/nm-openvpn-service.name";
       }
       { source = "${networkmanager_vpnc}/etc/NetworkManager/VPN/nm-vpnc-service.name";
         target = "NetworkManager/VPN/nm-vpnc-service.name";
