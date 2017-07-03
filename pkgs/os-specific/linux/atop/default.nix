@@ -11,8 +11,6 @@ stdenv.mkDerivation rec {
 
   buildInputs = [zlib ncurses];
 
-  patchPhase = "sed -i '/chmod 04711/chmod 0711/' Makefile";
-
   makeFlags = [
     ''SCRPATH=$out/etc/atop''
     ''LOGPATH=/var/log/atop''
