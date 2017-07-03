@@ -27,7 +27,7 @@ stdenv.mkDerivation rec {
     sed -e "/touch.*LOGPATH/s@touch@echo should have created @" -i Makefile
     sed -e 's/chown/true/g' -i Makefile
     sed -e '/chkconfig/d' -i Makefile
-    sed -e '/chmod 04711/chmod 0711' -i Makefile
+    sed -e 's/chmod 04711/chmod 0711/g' -i Makefile
   '';
 
   preInstall = ''
