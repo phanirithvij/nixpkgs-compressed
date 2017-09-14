@@ -74,7 +74,7 @@ in rec {
     ghc802 = callPackage ../development/compilers/ghc/8.0.2.nix rec {
       bootPkgs = packages.ghc7103;
       inherit (bootPkgs) hscolour;
-      sphinx = pkgs.python27Packages.sphinx;
+      sphinx = pkgs.python3Packages.sphinx;
     };
     ghc821 = callPackage ../development/compilers/ghc/8.2.1.nix rec {
       bootPkgs = packages.ghc802;
