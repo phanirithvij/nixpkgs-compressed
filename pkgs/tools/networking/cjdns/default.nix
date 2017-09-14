@@ -6,7 +6,7 @@ stdenv.mkDerivation {
 
   src = fetchurl {
     url = "https://github.com/cjdelisle/cjdns/archive/cjdns-v${version}.tar.gz";
-    sha256 = "1dyqxi9l2pmrgm16a161909rg3vfzvib40frr7p6ddpk8yfh5888";
+    sha256 = "1x94s6apgy1r1n5f0jcnbvpi001h8jdg0s89chn424khlky4kj78";
   };
 
   buildInputs = [ which python27 nodejs ] ++
