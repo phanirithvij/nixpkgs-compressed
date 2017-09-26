@@ -215,6 +215,8 @@ let
           maintainers.thoughtpolice
         ];
         platforms = platforms.linux;
+        maxSilent = 72000;
+        timeout = 72000;
       };
     };
 in
