@@ -19,6 +19,8 @@ let
       sha256 = "0gqihplap05dlpwdb971wsqyv01nz2vabwq5g5649gr5jczsyjzm";
     };
 
+    patches = [ ./rpi.patch ];
+
     nativeBuildInputs = [ bc dtc python2 ];
 
     hardeningDisable = [ "all" ];
