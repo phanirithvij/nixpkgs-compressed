@@ -1,0 +1,30 @@
+diff --git a/include/configs/rpi.h b/include/configs/rpi.h
+index c499b45b32..e02cbe4812 100644
+--- a/include/configs/rpi.h
++++ b/include/configs/rpi.h
+@@ -138,14 +138,20 @@
+  * ramdisk_addr_r simply shouldn't overlap anything else. Choosing 33M allows
+  *   for any boot script to be up to 1M, which is hopefully plenty.
+  */
++#ifdef CONFIG_ARM64
++#define XXX_HIGH_XXX "ffffffffffffffff"
++#else
++#define XXX_HIGH_XXX "ffffffff"
++#endif
++
+ #define ENV_MEM_LAYOUT_SETTINGS \
+-	"fdt_high=ffffffff\0" \
+-	"initrd_high=ffffffff\0" \
+-	"fdt_addr_r=0x00000100\0" \
++	"fdt_high=" XXX_HIGH_XXX "\0" \
++	"initrd_high=" XXX_HIGH_XXX "\0" \
++	"fdt_addr_r=0x04100000\0" \
+ 	"pxefile_addr_r=0x00100000\0" \
+ 	"kernel_addr_r=0x01000000\0" \
+-	"scriptaddr=0x02000000\0" \
+-	"ramdisk_addr_r=0x02100000\0" \
++	"scriptaddr=0x04200000\0" \
++	"ramdisk_addr_r=0x04300000\0" \
+ 
+ #define BOOT_TARGET_DEVICES(func) \
+ 	func(MMC, mmc, 0) \
