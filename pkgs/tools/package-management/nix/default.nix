@@ -40,12 +40,7 @@ let
     buildInputs = [ curl openssl sqlite xz ]
       ++ lib.optional (stdenv.isLinux || stdenv.isDarwin) libsodium
       ++ lib.optionals fromGit [ brotli readline nlohmann_json ] # Since 1.12
-      ++ lib.optional stdenv.isLinux libseccomp
-      ++ lib.optional ((stdenv.isLinux || stdenv.isDarwin) && is112)
-          (aws-sdk-cpp.override {
-            apis = ["s3"];
-            customMemoryManagement = false;
-          });
+      ++ lib.optional stdenv.isLinux libseccomp;
 
     propagatedBuildInputs = [ boehmgc ];
 
@@ -105,7 +100,7 @@ let
       doInstallCheck = false;
     };
 
-    enableParallelBuilding = true;
+    enableParallelBuilding = false;
 
     meta = {
       description = "Powerful package manager that makes package management reliable and reproducible";

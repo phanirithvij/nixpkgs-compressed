@@ -35,7 +35,7 @@ in stdenv.mkDerivation rec {
     ++ lib.optional (apis != ["*"])
       "-DBUILD_ONLY=${lib.concatStringsSep ";" apis}";
 
-  enableParallelBuilding = true;
+  enableParallelBuilding = false;
 
   # Behold the escaping nightmare below on loaderVar o.O
   preBuild =
