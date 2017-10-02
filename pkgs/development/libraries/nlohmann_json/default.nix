@@ -18,7 +18,7 @@ stdenv.mkDerivation rec {
   doCheck = true;
   checkTarget = "test";
 
-  enableParallelBuilding = true;
+  enableParallelBuilding = false;
 
   crossAttrs = {
     cmakeFlags = "-DBuildTests=OFF";
