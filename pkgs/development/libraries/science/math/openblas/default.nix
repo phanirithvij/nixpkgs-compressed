@@ -46,6 +46,15 @@ let
       CC = "gcc";
       USE_OPENMP = "1";
     };
+
+    aarch64-linux = {
+      BINARY = "64";
+      TARGET = "ARMV8";
+      DYNAMIC_ARCH = "0";
+      CC = "gcc";
+      USE_OPENMP = "1";
+    };
+
   };
 in
 
