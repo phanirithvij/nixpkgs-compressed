@@ -18692,6 +18692,8 @@ with pkgs;
 
   ### MISC
 
+  allwinner-atf = callPackage ../misc/allwinner-atf { };
+
   antimicro = libsForQt5.callPackage ../tools/misc/antimicro { };
 
   atari800 = callPackage ../misc/emulators/atari800 { };
