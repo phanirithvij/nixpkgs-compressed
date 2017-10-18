@@ -521,11 +521,11 @@ rec {
   };
 
   neomake = buildVimPluginFrom2Nix { # created by nix#NixDerivation
-    name = "neomake-2017-07-25";
+    name = "neomake-2017-10-16";
     src = fetchgit {
       url = "https://github.com/benekastah/neomake";
-      rev = "0d1f1508ce2c9cfcffbf74a6bdea9c5766301fd6";
-      sha256 = "0wc9b63s4j80f6irf2g6dmk2nx8w9il4dccbgmzirchmymndw4vh";
+      rev = "b754024aa762482180e3633b12c8f75b5eade857";
+      sha256 = "1s8h0z61yspx36fc01apgycczrw1884apgb8px2cbi4ln741fsn5";
     };
     dependencies = [];
 
