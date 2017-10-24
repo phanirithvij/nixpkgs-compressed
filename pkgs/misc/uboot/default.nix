@@ -1,4 +1,4 @@
-{ stdenv, fetchurl, bc, dtc, python2
+{ stdenv, fetchurl, bc, dtc, python2, allwinner-atf
 , hostPlatform
 }:
 
@@ -101,6 +101,13 @@ in rec {
     defconfig = "odroid-xu3_defconfig";
     targetPlatforms = ["armv7l-linux"];
     filesToInstall = ["u-boot-dtb.bin"];
+  };
+
+  ubootOrangePiPrime = buildUBoot rec {
+    defconfig = "orangepi_prime_defconfig";
+    BL31 = "${allwinner-atf}/bl31.bin";
+    targetPlatforms = ["aarch64-linux"];
+    filesToInstall = ["u-boot.itb" "spl/sunxi-spl.bin"];
   };
 
   ubootPcduino3Nano = buildUBoot rec {
