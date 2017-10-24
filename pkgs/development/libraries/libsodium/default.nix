@@ -13,7 +13,7 @@ stdenv.mkDerivation rec {
 
   enableParallelBuilding = true;
 
-  doCheck = false;
+  doCheck = true;
 
   meta = with stdenv.lib; {
     description = "A modern and easy-to-use crypto library";
