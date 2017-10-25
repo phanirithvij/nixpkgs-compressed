@@ -1,4 +1,4 @@
-{ runCommand, nettools, bc, perl, gmp, libmpc, mpfr, kmod, openssl
+{ runCommand, nettools, bc, perl, gmp, libmpc, mpfr, kmod, openssl, utillinux
 , writeTextFile, ubootChooser
 , hostPlatform
 }:
@@ -224,7 +224,7 @@ stdenv.mkDerivation ((drvAttrs config stdenv.platform (kernelPatches ++ nativeKe
 
   enableParallelBuilding = true;
 
-  nativeBuildInputs = [ perl bc nettools openssl gmp libmpc mpfr ] ++ optional (stdenv.platform.uboot != null)
+  nativeBuildInputs = [ perl bc nettools openssl gmp libmpc mpfr utillinux ] ++ optional (stdenv.platform.uboot != null)
     (ubootChooser stdenv.platform.uboot);
 
   hardeningDisable = [ "bindnow" "format" "fortify" "stackprotector" "pic" ];
