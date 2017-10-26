@@ -1,7 +1,7 @@
 { stdenv, hostPlatform, fetchFromGitHub, perl, buildLinux, ... } @ args:
 
 import ./generic.nix (args // rec {
-  version = "4.14-rc5-next-20171018";
+  version = "4.14-rc5";
   modDirVersion = "4.14.0-rc5-next-20171018";
   extraMeta.branch = "4.14";
 
