@@ -19,7 +19,7 @@ let
       sha256 = "0i4p12ar0zgyxs8hiqgp6p6shvbw4ikkvryd4mh70bppyln5zldj";
     };
 
-    patches = [ ./rpi.patch ];
+    patches = [ ./rpi.patch ./pathlen.patch ];
 
     nativeBuildInputs = [ bc dtc python2 ];
 
