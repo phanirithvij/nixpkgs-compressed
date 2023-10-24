@@ -26,12 +26,6 @@ stdenvNoCC.mkDerivation rec {
   # There's nothing to build.
   dontBuild = true;
 
-  # the data folder is no in this package and thereby declared by an env-var
-  overrideConfig = pkgs.writeText "constants.local.php" ''
-    <?php
-      define('DATA_PATH', getenv('FRESHRSS_DATA_PATH'));
-  '';
-
   postPatch = ''
     patchShebangs cli/*.php app/actualize_script.php
   '';
